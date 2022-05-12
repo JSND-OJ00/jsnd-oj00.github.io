@@ -1,0 +1,36 @@
+# 220512 회고
+
+```jsx
+function fibonacci(num) {
+  if (num <= 1) {
+    return num;
+  }
+  return fibonacci(num - 1) + fibonacci(num - 2);
+}
+```
+
+![스크린샷 2022-05-12 20.29.49.png](220512%20%E1%84%92%E1%85%AC%E1%84%80%E1%85%A9%20f5c615a899664f0c8ca648ed554633e1/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-05-12_20.29.49.png)
+
+- 이렇게 복잡한 문제를 조각내어 푸는 방식을 하향식이라 부름
+- 위의 경우 n번 반복하면 약 2의 n승개의 함수가 발생
+- n이 커질 수록 계산에 걸리는 시간은 폭발적으로 증가
+
+## 해결법 - 메모이제이션
+
+- 동일한 계산을 반복해야 할 경우, 한 번 계산한 결과를 메모리에 저장해 두었다가 필요할 때 사용하여 중복 계산을 방지
+
+```jsx
+function fibonacci(num, memo) {
+	memo = memo || {}
+	if (mem[num]) {
+		return memo[num]
+	}
+	if (num <= 1) {
+		return num
+	}
+	return memo[n] = fibonacci(num - 1, memo) + fibonacci(num - 2, memo)
+```
+
+어떤 원린지 느낌적 느낌으로 이해는 간다.
+
+짧은 계산 보단 긴 계산에서 더 유용할 것 같다.
