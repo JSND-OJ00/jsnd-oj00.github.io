@@ -1,0 +1,45 @@
+# 트윗 delete 기능 추가
+
+tweet은 tweets의 자식 컴포넌트 이므로, 유저를 삭제하는 함수를 tweets에서 정의, prop으로 줍니다.
+
+```jsx
+tweets.js
+
+const handleDeleteTweet = (username,deleteIndex) => {
+	if (isFiltered) {
+		alert("필터를 해제해주세요.");
+		return;
+	}
+	const restTweets= tweets.filter((tweet, idx) => idx !== deleteIndex)
+	setTweets(restTweets);
+};
+
+const tweetsRenderer = (tweet ,idx) => {
+	return (
+		<Tweet
+			key={tweet.id}
+			tweet={tweet}
+			idx={idx}
+			handleDeleteTweet={handleDeleteTweet} // 위에서 정의된 handleDeleteTweet을 자식 컴포넌트(tweet)에 전달합니다.
+		/>
+	);
+}; 
+```
+
+트윗을 삭제하기 위한 버튼을 만들고 온클릭 이벤트로 부모 컴포넌트(tweets)에서 받아온 prop, handleDeleteUser 함수를 사용합니다.
+
+```jsx
+tweet.js
+
+const Tweet = ({ tweet, handleDeleteTweet, idx}) => { //handleDeleteTweet을 받아서
+...
+
+			<div className="tweet__userInfo--buttonWrapper">
+				<button
+					className="tweet__deleteButton"
+					onClick={() => handleDeleteTweet(tweet.username, idx)} //요렇게 사용합니다.
+				>
+				<i className="far fa-trash-alt">
+				</button>
+			</div>
+```
